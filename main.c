@@ -48,6 +48,7 @@
 // Some texts in Flash used by the application
 const char  txok[] PROGMEM 		= "R";
 const char  vers[] PROGMEM      = "V0.75";
+const char  prgx[] PROGMEM 		= "SK";
 
 void pitch(void)
 /*! 
@@ -511,7 +512,7 @@ void commandmode(void)
 	}
         
         
-	yackchar('E'); 			// Sign off
+	yackstring(prgx); 			// Sign off
 
 	yackinhibit(OFF);		// Back to normal mode
 	
