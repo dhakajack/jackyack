@@ -49,6 +49,7 @@
 const char  txok[] PROGMEM 		= "R";
 const char  vers[] PROGMEM      = "V0.75";
 const char  prgx[] PROGMEM 		= "SK";
+const char  imok[] PROGMEM		= "73";
 
 void pitch(void)
 /*! 
@@ -532,6 +533,10 @@ int main(void)
 {
 	
 	yackinit(); 					// Initialize YACK hardware
+	
+	yackinhibit(ON);  //side tone greeting to confirm the unit is alive and kicking
+	yackstring(imok);
+	yackinhibit(OFF);
 	
 	while(1) // Endless core loop of the keyer app
 	{
