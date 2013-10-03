@@ -2,7 +2,7 @@
  
  @file      main.c
  @brief     CW Keyer application
- @author    Jan Lategahn DK3LJ jan@lategahn.com (C) 2010
+ @author    Jan Lategahn DK3LJ jan@lategahn.com (C) 2010 modified by Jack Welch AI4SV
 
  This file implements a sample CW keyer application by using the yack.c
  library. It is targeted at the ATTINY45 microcontroller but can be used
@@ -22,11 +22,11 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
- @version   0.7
+ @version   0.75
  
  @date      15.10.2010  - Created
  @date      16.12.2010  - Submitted to SVN
- @date      16.11.2011  - Last change
+ @date      03.10.2013  - Last change
  
  */ 
 
@@ -46,8 +46,8 @@
 #define     FARNSREPEAT     10      // 10 a's will be played for Farnsworth
 
 // Some texts in Flash used by the application
-const char  txok[] PROGMEM 		= "OK";
-const char  vers[] PROGMEM      = "V0.7";
+const char  txok[] PROGMEM 		= "R";
+const char  vers[] PROGMEM      = "V0.75";
 
 void pitch(void)
 /*! 
