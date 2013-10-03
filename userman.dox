@@ -34,11 +34,12 @@ To demonstrate the library, a standard keyer application has been written which 
 
 This document describes the operation of the keyer from a user perspective
 
-Version: 0.7
+Version: 0.75
 
 @section hw Hardware
 
-As is, the library is configured to run on a stock ATTINY45 cpu with its internal oscillator at 8MHz, prescaled to 1MHz.
+As is, the library is configured to run on a ATTINY45 cpu, as shipped, with its internal oscillator at 8MHz, 
+and prescaled to 1MHz.
 
 The ATTINY45 comes with 4KB of Flash memory and 256 Byte each for RAM and EEPROM. It can be ported to other AVR chips
 if these have sufficient features to support the intended application. As the library was written in C, processors without
@@ -57,12 +58,13 @@ Hardware connections are defined in yack.h
 
 @section usage Usage
 
-After reset in default mode, the keyer operates as regular IAMBIC keyer in IAMBIC B at 12 WPM
-(words per minute = 60 CPM). The sidetone generator operates at 800 Hz.
+After reset in default mode, the keyer operates as regular IAMBIC keyer in IAMBIC A at 15 WPM
+(words per minute = 60 CPM), with 700 Hz side tone. By default, the transmitter keying signal is
+positive.
 
 @subsection speed Speed Change
 
-Speed can be changed py pressing and holding the command key while operating the DIT and DAH paddles.
+Speed can be changed by pressing and holding the command key while operating the DIT and DAH paddles.
 DIT reduces speed while DAH increases speed. The keyer plays an alternating sequence of dit and dah while
 changing speed without keying the transmitter.
 
@@ -70,7 +72,7 @@ changing speed without keying the transmitter.
 
 Pressing the command button without changing speed will switch the keyer into command mode. This will be 
 confirmed with the '?' character. Another press of the same button takes the keyer back into regular
-keyer mode and will be confirmed by a single dot.
+keyer mode and will be confirmed by the 'SK' prosign.
 
 During command mode the transceiver is never keyed and sidetone is always activated. Further
 functions can be accessed by keying one-letter commands as listed below.
@@ -83,7 +85,7 @@ The keyer responds with the current keyer software version number
 
 Allows modifying the sidetone pitch to a higher or lower level. A sequence of dits will be played
 and the pitch can be modified with the dit and dah paddles. If no paddle is touched for 5 seconds, 
-OK is sounded and the mode terminates, leaving the user in command mode.
+the acknowledgment signal 'R' is sounded and the mode terminates, leaving the user in command mode.
 
 @subsubsection reset R - Reset
 
@@ -97,15 +99,15 @@ DIT or DAH paddles are touched or the control key is pressed.
 
 @subsubsection ia A - IAMBIC A
 
-Keyer sets IAMBIC A as permanent keying mode. Request is answered with "A OK".
+Keyer sets IAMBIC A as permanent keying mode. An 'R' is sounded to acknowledge the request.
 
 @subsubsection ib B - IAMBIC B
 
-Keyer sets IAMBIC B as permanent keying mode. Request is answered with "B OK".
+Keyer sets IAMBIC B as permanent keying mode. An 'R' is sounded to acknowledge the request.
 
 @subsubsection ultimatic L - Ultimatic
 
-Sets the keyer into ULTIMATIC mode. In Ultimatic mode always tha last paddle to be touched is repeated indefinitely
+Sets the keyer into ULTIMATIC mode. In Ultimatic mode always the last paddle to be touched is repeated indefinitely
 when paddles are squeezed
 
 @subsubsection dahprio D - DAH priority mode. In squeezed state a sequence of DAHs is sent.
@@ -114,29 +116,29 @@ Some of the first generation keyers exhibited this behaviour so the chip can sim
 
 @subsubsection swap X - Paddle swapping
 
-DIT and DAH paddles are swapped. Request is answered with "OK".
+DIT and DAH paddles are swapped. An 'R' is sounded to acknowledge the request.
 
 @subsubsection side S - Sidetone toggle
 
-The builtin sidetone generator setting is toggled (ON -> OFF or OFF -> ON). NOTE: This setting is only of relevance 
-for regular keying mode. Sidetone is always on in command mode. Request is answered with "OK".
+The built-in sidetone generator setting is toggled (ON -> OFF or OFF -> ON). NOTE: This setting is only of relevance 
+for regular keying mode. Sidetone is always on in command mode. An 'R' is sounded to acknowledge the request.
 
 @subsubsection txtog K - TX Keying toggle
 
-Toggles the setting of the TX keyer output. In default state the keyer switches the output line when it  is in keyer mode. 
-Toggling this setting enables or disables that function. NOTE: Keying is always off in Command mode. Request is answered 
-with "OK".
+Toggles the setting of the TX keyer output. In default state the keyer switches the output line when it is in keyer mode. 
+Toggling this setting enables or disables that function. NOTE: Keying is always off in Command mode. An 'R' is sounded to 
+acknowledge the request.
 
 @subsubsection farnsworth Z - Set Farnsworth pause
 
-Allows setting of an extended inter-character Pause in all sending modes which makes fast keying easier to understand. 
+Allows setting of an extended inter-character pause in all sending modes, which makes fast keying easier to understand. 
 Note that this of course only influences RECEPTION, not TRANSMISSION. If you desire farnsworth mode in transmission, please 
 manually pause during characters.
  
 @subsubsection lvtog I - TX level inverter toggle
 
-This function toggles wether the "active" level on the keyer output is VCC or GND. This setting is dependent on the 
-attached keying circuit. Request is answered with "OK".
+This function toggles wether the "active" level on the keyer output is VCC or GND. The default is VCC. This setting 
+is dependent on the attached keying circuit. An 'R' is sounded to acknowledge the request.
 
 @subsubsection query W - Query current WPM speed
 
@@ -155,8 +157,8 @@ returns the keyer to keyer mode so a QSO can be started.
 
 @subsubsection beacon N - Automatic Beacon
 
-The keyer responds with "N" after which a number between 0 and 9999 can be keyed. After a 5 second timeout the keyer
-responds by repeating the number and "OK". Once the keyer returns to keyer mode, the content of message buffer 2 is
+The keyer responds with 'N' after which a number between 0 and 9999 can be keyed. After a 5 second timeout the keyer
+responds by repeating the number and 'R'. Once the keyer returns to keyer mode, the content of message buffer 2 is
 repeated in intervals of n seconds. The setting is preserved in EEPROM so the chip can be used as a fox hunt keyer.
 
 Returning to command mode and entering an interval of 0 (or none at all) stops beacon mode.
@@ -167,8 +169,8 @@ The 0 command locks or unlocks the main configuration items but not speed, pitch
 
 @subsubsection trainer C - Callsign trainer
 
-The keyer plays a generated callsign (sidetone only) and the user must repeat it. If it was repeated correctly, "R" is 
-played and the next callsign is given. If a mistake was sensed, the error prosign (8 dots) is sounded and
+The keyer plays a generated callsign (sidetone only) and the user must repeat it. If it was repeated correctly, 'R' is 
+played and the next callsign is given. If a mistake was sensed, the error prosign (8 dits) is sounded and
 the current callsign is repeated again for the user to try once more. If nothing is keyed for 10 seconds, the keyer returns
 to command mode.
 
