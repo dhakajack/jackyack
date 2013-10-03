@@ -1,10 +1,10 @@
 /* ********************************************************************
  Program	: yack.h
- Author		: Jan Lategahn DK3LJ
+ Author		: Jan Lategahn DK3LJ modified by Jack Welch AI4SV
  Purpose	: definition of keyer hardware
  Created	: 15.10.2010
  Update		: 16.11.2011
- Version	: 0.7
+ Version	: 0.75
  
  Changelog
  ---------
@@ -92,7 +92,7 @@
 // These values limit the speed that the keyer can be set to
 #define		MAXWPM			50  
 #define		MINWPM			5
-#define		DEFWPM			12
+#define		DEFWPM			15
 
 // Farnsworth parameters
 #define     FARNSWORTH      1
