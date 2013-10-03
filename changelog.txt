@@ -57,4 +57,12 @@ Released: V. 0.7
   + Bug in the Macro playback routine. After playing back, the routine
     immediately sends an OK and exits to key mode. Now it does not send the OK but returns to 
     key mode after 15 seconds so the user gets the chance to repeat the macro in this time.
-     
+
+Released V. 0.75 (really, just personalized preferences for DK3LJ's YACK project) 03.10.2013
+  + Default mode Iambic A
+  + Default side tone 700 Hz
+  + Default keying positive
+  + Default speed 15 wpm
+  + Plays greeting "73" (without keying) when powered on
+  + Replaced "OK" with "R" for command acknowledgments
+  + Replaced "E" with "SK" when exiting command mode
