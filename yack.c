@@ -61,7 +61,7 @@ static      byte    farnsworth;     // Additional Farnsworth pause
 // EEPROM Data
 
 byte		magic EEMEM = MAGPAT;	// Needs to contain 'A5' if mem is valid
-byte		flagstor EEMEM = ( IAMBICA | TXKEY | SIDETONE | TXINV);	//	Defaults	
+byte		flagstor EEMEM = ( IAMBICA | TXKEY | SIDETONE);	//	Defaults	
 word		ctcstor EEMEM = DEFCTC;	// Pitch = 700Hz
 byte		wpmstor EEMEM = DEFWPM;	// 15 WPM
 byte        fwstor  EEMEM = 0; // No farnsworth pause
