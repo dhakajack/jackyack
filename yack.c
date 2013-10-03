@@ -2,9 +2,9 @@
  
  @file      yack.c
  @brief     CW Keyer library
- @author    Jan Lategahn DK3LJ jan@lategahn.com (C) 2011
+ @author    Jan Lategahn DK3LJ jan@lategahn.com (C) 2011; modified by Jack Welch AI4SV
  
- @version   0.7
+ @version   0.75
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
  @date      15.10.2010  - Created
- @date      16.11.2011  - Last update
+ @date      03.10.2013  - Last update
  
  @todo      Make the delay dependent on T/C 1 
 
@@ -61,9 +61,9 @@ static      byte    farnsworth;     // Additional Farnsworth pause
 // EEPROM Data
 
 byte		magic EEMEM = MAGPAT;	// Needs to contain 'A5' if mem is valid
-byte		flagstor EEMEM = ( IAMBICB | TXKEY | SIDETONE | TXINV);	//	Defaults	
-word		ctcstor EEMEM = DEFCTC;	// Pitch = 800Hz
-byte		wpmstor EEMEM = DEFWPM;	// 12 WPM
+byte		flagstor EEMEM = ( IAMBICA | TXKEY | SIDETONE | TXINV);	//	Defaults	
+word		ctcstor EEMEM = DEFCTC;	// Pitch = 700Hz
+byte		wpmstor EEMEM = DEFWPM;	// 15 WPM
 byte        fwstor  EEMEM = 0; // No farnsworth pause
 word		user1 EEMEM = 0; // User storage
 word		user2 EEMEM = 0; // User storage
@@ -160,7 +160,7 @@ void yackreset (void)
 */
 {
 
-	ctcvalue=DEFCTC; // Initialize to 800 Hz
+	ctcvalue=DEFCTC; // Initialize to 700 Hz
     wpm=DEFWPM; // Init to default speed
 	wpmcnt=(1200/YACKBEAT)/DEFWPM; // default speed
     farnsworth=0; // No Farnsworth gap
