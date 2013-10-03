@@ -3,7 +3,7 @@
  Author		: Jan Lategahn DK3LJ modified by Jack Welch AI4SV
  Purpose	: definition of keyer hardware
  Created	: 15.10.2010
- Update		: 16.11.2011
+ Update		: 03.10.2013
  Version	: 0.75
  
  Changelog
