@@ -64,7 +64,7 @@
 #define		ULTIMATIC		0b00001000  // Ultimatic Mode
 #define		DAHPRIO			0b00001100  // Always give DAH priority
 
-#define		FLAGDEFAULT		IAMBICB | TXKEY | SIDETONE
+#define		FLAGDEFAULT		IAMBICA | TXKEY | SIDETONE
 
 // Definition of volflags variable. These flags do not get stored in EEPROM.
 #define		DITLATCH		0b00000001  // Set if DIT contact was closed
@@ -121,7 +121,7 @@
                                                      // a given frequency
 
 // Default sidetone frequency
-#define		DEFFREQ			800     // Default sidetone frequency
+#define		DEFFREQ			700     // Default sidetone frequency
 #define		MAXFREQ			1500    // Maximum frequency
 #define		MINFREQ			400     // Minimum frequenc
 
